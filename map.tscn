@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsfi8q4qmvxws"]
+[gd_scene load_steps=16 format=3 uid="uid://dsfi8q4qmvxws"]
 
 [ext_resource type="Texture2D" uid="uid://c63qq8dd5qmja" path="res://main/image/decord.png" id="1_gqbix"]
 [ext_resource type="Texture2D" uid="uid://1vce6u17elmn" path="res://main/image/background.png" id="2_pf70i"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dbo2gejxd1fwn" path="res://chapiteau.tscn" id="7_kse76"]
 [ext_resource type="PackedScene" uid="uid://cme4dwdb76dl8" path="res://saloon.tscn" id="8_8cume"]
 [ext_resource type="PackedScene" uid="uid://b58siwcd21luk" path="res://chinabuilding.tscn" id="9_dysp3"]
+[ext_resource type="PackedScene" uid="uid://dvwr5qxj0w6k1" path="res://grotte.tscn" id="10_grotte"]
+[ext_resource type="PackedScene" uid="uid://c2jkd5xq8w3k2" path="res://chapiteau2.tscn" id="11_chapiteau2"]
+[ext_resource type="PackedScene" uid="uid://b8jqx9w7k3m4n" path="res://jongleur.tscn" id="12_jongleur"]
 
 [sub_resource type="GDScript" id="GDScript_krxrc"]
 script/source = "extends Node2D
@@ -9093,6 +9096,10 @@ position = Vector2(-2667, 650.00006)
 position = Vector2(1688.0001, 669.00006)
 scale = Vector2(0.2781251, 0.25859618)
 
+[node name="jongleur" parent="Entité" instance=ExtResource("12_jongleur")]
+position = Vector2(500, 670)
+scale = Vector2(2.8, 2.8)
+
 [node name="Stand" type="Node2D" parent="."]
 
 [node name="chapiteau" parent="Stand" instance=ExtResource("7_kse76")]
@@ -9106,3 +9113,11 @@ position = Vector2(1617, 635)
 position = Vector2(-2806, 612)
 scale = Vector2(2.145833, 2.0458333)
 frame = 0
+
+[node name="grotte" parent="Stand" instance=ExtResource("10_grotte")]
+position = Vector2(3200, 550)
+scale = Vector2(2.0, 2.0)
+
+[node name="chapiteau2" parent="Stand" instance=ExtResource("11_chapiteau2")]
+position = Vector2(-800, 497)
+scale = Vector2(2.18, 2.0266664)

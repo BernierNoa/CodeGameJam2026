@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvwr5qxj0w6k1"]
+
+[ext_resource type="Texture2D" uid="uid://bdm7ed1r3m2ai" path="res://main/image/saloon.png" id="1_saloon"]
+[ext_resource type="PackedScene" uid="uid://yrqwjhmkf5sc" path="res://interaction.tscn" id="2_interaction"]
+
+[sub_resource type="GDScript" id="GDScript_grotte"]
+resource_name = "grotte"
+script/source = "extends Sprite2D
+
+func _ready():
+	# Connexion au signal global
+	signal_manager.interact_boss_victoire.connect(on_boss_victoire)
+	
+	# Frame 0 : état initial (grotte non explorée)
+	frame = 0
+
+func on_boss_victoire():
+	# Frame 1 : état réparé (après victoire contre le Minotaure)
+	frame = 1
+"
+
+[node name="grotte" type="Sprite2D"]
+z_as_relative = false
+position = Vector2(0, 0)
+texture = ExtResource("1_saloon")
+centered = false
+hframes = 2
+script = SubResource("GDScript_grotte")
+
+[node name="Interaction" parent="." instance=ExtResource("2_interaction")]
+position = Vector2(60, 60)
+interact_label = "E: Entrer dans la grotte"
+interact_type = "interact_boss"
