@@ -176,6 +176,10 @@ func _on_gobelet_selectionne(gobelet):
 		label_info.text = "BRAVO ! (+10)"
 		
 		if score >= 70: # J'ai remis >= par sécurité au lieu de ==
+			# Marquer le bâtiment comme réparé
+			signal_manager.marquer_batiment_repare("gobelet")
+			signal_manager.interact_goblet_victoire.emit()
+			
 			label_fin.text = "BÂTIMENT RÉPARÉ !!!"
 			label_fin.visible = true
 			quitbutton.visible = true
@@ -186,7 +190,7 @@ func _on_gobelet_selectionne(gobelet):
 				if is_instance_valid(g): g.queue_free()
 			liste_gobelets.clear()
 			
-			# emit_signal("goblet_victoire") # Décommente si tu as déclaré le signal en haut
+			print("[Gobelet] Victoire! Bâtiment réparé")
 		else:
 			await get_tree().create_timer(1.5).timeout
 			demarrer_manche()
@@ -214,7 +218,8 @@ func update_ui():
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://gobelet_debut.tscn")
+	print("[Gobelet] Retour à la carte")
+	get_tree().change_scene_to_file("res://map.tscn")
 
 
 func _on_rejouer_button_pressed() -> void:

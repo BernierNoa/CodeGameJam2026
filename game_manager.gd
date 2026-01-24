@@ -138,11 +138,16 @@ func _process(delta):
 		minotaureMort.visible = true
 		minotaureMort.play()
 		await get_tree().create_timer(3.0).timeout
-		label_affichage.text = "Victoire ! La fête est sauvé !"
+		
+		# Marquer le bâtiment comme réparé
+		signal_manager.marquer_batiment_repare("course")
+		signal_manager.interact_boss_victoire.emit()
+		
+		label_affichage.text = "Victoire ! La fête est sauvée !"
 		label_affichage.visible = true
 		playbutton.visible = true
 		quitbutton.visible = true # Arrête le jeu
-		emit_signal("boss_victoire")
+		print("[Boss] Victoire! Course terminée")
 
 func changer_phase(nouvelle_phase, vitesse_minotaure):
 	if phase_actuelle == nouvelle_phase:
@@ -163,7 +168,8 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://main_menu.tscn")
+	print("[Boss] Retour à la carte")
+	get_tree().change_scene_to_file("res://map.tscn")
 
 func changer_musique(nouvelle_musique):
 	# Si c'est déjà la bonne musique, on ne fait rien
