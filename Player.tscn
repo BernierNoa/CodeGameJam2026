@@ -130,11 +130,16 @@ func execute_interaction():
 		match cur_interaction.interact_type:
 			\"interact_ballon\" : StartBallon()
 			\"interact_clicker\" : signal_manager.interact_clicker.emit()
-			\"interact_junggle\": signal_manager.interact_junggle.emit()
+			\"interact_junggle\": 
+				# Sauvegarder la position avant de changer de scène
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://juggles_start.tscn\")
 			\"interact_goblet\": signal_manager.interact_goblet.emit()
 			\"interact_cookies\": signal_manager.interact_cookies.emit()
-			# minotaure a modif
-			\"interact_boss\" : signal_manager.interact_boss.emit()
+			\"interact_boss\":
+				# Sauvegarder la position avant de changer de scène
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://CourseMinotaure.tscn\")
 			
 				
 			

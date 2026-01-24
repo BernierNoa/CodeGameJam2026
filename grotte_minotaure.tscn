@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx8q9m5n7p2r1"]
+
+[ext_resource type="Texture2D" uid="uid://c0pwu46txnyrc" path="res://minotaure/carrenoir.png" id="1_cave"]
+[ext_resource type="Script" path="res://grotte_minotaure.gd" id="2_cave"]
+[ext_resource type="PackedScene" uid="uid://yrqwjhmkf5sc" path="res://interaction.tscn" id="3_cave"]
+
+[node name="grotte_minotaure" type="Sprite2D"]
+texture = ExtResource("1_cave")
+script = ExtResource("2_cave")
+
+[node name="Interaction" parent="." instance=ExtResource("3_cave")]
+interact_label = "E: Entrer dans la grotte"
+interact_type = "interact_boss"

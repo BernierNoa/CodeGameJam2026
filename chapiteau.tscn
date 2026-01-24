@@ -7,15 +7,22 @@ resource_name = "chapiteau"
 script/source = "extends Sprite2D
 
 func _ready():
-	# Connexion au signal global
-	signal_manager.interact_ballon_victoire.connect(on_ballon_victoire)
+	# Connexion au signal de victoire du jonglage
+	signal_manager.interact_junggle_victoire.connect(on_junggle_victoire)
 	
-	# On change la frame de l'objet lui-même (self)
-	frame = 0 
+	# Charger l'état initial depuis le singleton
+	update_visual_state()
 
-func on_ballon_victoire():
-	# Quand on gagne, on change l'image
-	frame = 1
+func update_visual_state():
+	# Frame 0 = détruit, Frame 1 = en construction, Frame 2 = réparé
+	if signal_manager.batiments_repares[\"jonglage\"]:
+		frame = 2  # Bâtiment réparé
+	else:
+		frame = 0  # Bâtiment détruit
+
+func on_junggle_victoire():
+	# Quand le joueur gagne le mini-jeu, mettre à jour l'affichage
+	update_visual_state()
 
 	
 "
