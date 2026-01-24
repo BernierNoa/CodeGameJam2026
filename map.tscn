@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsfi8q4qmvxws"]
+[gd_scene load_steps=17 format=3 uid="uid://dsfi8q4qmvxws"]
 
 [ext_resource type="Texture2D" uid="uid://c63qq8dd5qmja" path="res://main/image/decord.png" id="1_gqbix"]
 [ext_resource type="Texture2D" uid="uid://1vce6u17elmn" path="res://main/image/background.png" id="2_pf70i"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://dmg5otr3lw8op" path="res://map.gd" id="10_map"]
 [ext_resource type="Texture2D" uid="uid://c5y2gx58f21v3" path="res://main/image/chapiteau.png" id="11_0t07s"]
 [ext_resource type="Script" uid="uid://mtcyn85o36xp" path="res://chapiteau_2.gd" id="11_sb2pt"]
+[ext_resource type="Texture2D" uid="uid://da0v2kb6mix86" path="res://main/image/grotte.png" id="14_ooc2g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oysan"]
 texture = ExtResource("1_gqbix")
@@ -9096,8 +9097,7 @@ hframes = 3
 script = ExtResource("11_sb2pt")
 
 [node name="grotte" type="Sprite2D" parent="Stand"]
-position = Vector2(3150, 650)
-scale = Vector2(1.95, 1.95)
-texture = ExtResource("11_0t07s")
-hframes = 3
+position = Vector2(4822, 623.00006)
+scale = Vector2(1.7808338, 1.6283338)
+texture = ExtResource("14_ooc2g")
 script = ExtResource("11_sb2pt")
