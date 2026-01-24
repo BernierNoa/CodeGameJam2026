@@ -61,8 +61,11 @@ func restaurer_etat_batiments() -> void:
 	
 	# Restaurer le chinabuilding (jonglage)
 	if chinabuilding != null and etat_batiments.get("jonglage", false):
-		# Le chinabuilding n'a pas de script actuellement, on change juste la frame
-		chinabuilding.frame = 1
+		if chinabuilding.has_method("on_junggle_victoire"):
+			chinabuilding.on_junggle_victoire()
+		else:
+			# Fallback: changer la frame directement
+			chinabuilding.frame = 1
 		print("[Map] Chinabuilding restauré à l'état réparé")
 	
 	# Note: Le bâtiment "course" (minotaure) n'a pas de représentation visuelle sur la map
