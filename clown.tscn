@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxj14drls813a"]
+[gd_scene load_steps=9 format=3 uid="uid://cxj14drls813a"]
 
 [ext_resource type="Texture2D" uid="uid://c5atawrtft8sk" path="res://main/image/Clown_Sprite.png" id="1_6k0sn"]
 [ext_resource type="PackedScene" uid="uid://yrqwjhmkf5sc" path="res://interaction.tscn" id="2_iysh8"]
-[ext_resource type="Script" path="res://chapiteau.gd" id="3_clown"]
 
 [sub_resource type="Animation" id="Animation_51p13"]
 length = 0.001
@@ -57,7 +56,6 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 [node name="Sprite2D" type="Sprite2D"]
 texture = ExtResource("1_6k0sn")
 hframes = 9
-script = ExtResource("3_clown")
 
 [node name="AnimationClown" type="AnimationPlayer" parent="."]
 libraries = {
