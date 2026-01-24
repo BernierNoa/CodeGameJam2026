@@ -3,6 +3,9 @@ extends Node2D
 ## Script de la carte principale (map.tscn)
 ## Gère la restauration de l'état du jeu (position joueur, bâtiments réparés)
 
+# Constantes pour les frames des bâtiments
+const FRAME_REPAIRED = 1
+
 @onready var music: AudioStreamPlayer2D = $map_music
 @onready var joueur = $Entité/Joueur
 @onready var chapiteau = $Stand/chapiteau  # Bâtiment du ballon
@@ -47,7 +50,7 @@ func restaurer_etat_batiments() -> void:
 			chapiteau.on_ballon_victoire()
 		else:
 			# Fallback: changer la frame directement
-			chapiteau.frame = 1
+			chapiteau.frame = FRAME_REPAIRED
 		print("[Map] Chapiteau restauré à l'état réparé")
 	
 	# Restaurer le saloon (gobelet)
@@ -56,7 +59,7 @@ func restaurer_etat_batiments() -> void:
 			saloon.on_goblet_victoire()
 		else:
 			# Fallback: changer la frame directement
-			saloon.frame = 1
+			saloon.frame = FRAME_REPAIRED
 		print("[Map] Saloon restauré à l'état réparé")
 	
 	# Restaurer le chinabuilding (jonglage)
@@ -65,7 +68,7 @@ func restaurer_etat_batiments() -> void:
 			chinabuilding.on_junggle_victoire()
 		else:
 			# Fallback: changer la frame directement
-			chinabuilding.frame = 1
+			chinabuilding.frame = FRAME_REPAIRED
 		print("[Map] Chinabuilding restauré à l'état réparé")
 	
 	# Note: Le bâtiment "course" (minotaure) n'a pas de représentation visuelle sur la map
