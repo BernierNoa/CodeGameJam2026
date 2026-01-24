@@ -1,0 +1,194 @@
+[gd_scene load_steps=15 format=3 uid="uid://bpk30f6s5qg4q"]
+
+[ext_resource type="Script" uid="uid://cbukkrbp2uhaw" path="res://game_manager.gd" id="1_ppicn"]
+[ext_resource type="Texture2D" uid="uid://b8o5i174ltgfl" path="res://minotaure/fondMinotaure.png" id="2_2m4lo"]
+[ext_resource type="SpriteFrames" uid="uid://dq2cbali7i4vw" path="res://WalkPerso.tres" id="2_ndxm0"]
+[ext_resource type="Script" uid="uid://dynn1qe20kdv2" path="res://joueur.gd" id="3_crqbl"]
+[ext_resource type="SpriteFrames" uid="uid://d1liwgsj2hvfn" path="res://WalkMinotaure.tres" id="3_vgbti"]
+[ext_resource type="SpriteFrames" uid="uid://caux0jognkl5a" path="res://DeadMinotaure.tres" id="4_hwifx"]
+[ext_resource type="Script" uid="uid://2luivoihvp01" path="res://minotaure.gd" id="5_yc7jj"]
+[ext_resource type="AudioStream" uid="uid://b534symuxbf0c" path="res://sounds/cours minautor.mp3" id="7_awipg"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="8_crqbl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f42tj"]
+size = Vector2(124.5, 121.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4fg0w"]
+size = Vector2(124, 130.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fg0w"]
+bg_color = Color(0, 0, 0, 0.7019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eeeln"]
+bg_color = Color(0.38043424, 0.5833809, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsfer"]
+bg_color = Color(0.74416447, 0, 0.09977371, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 1
+shadow_offset = Vector2(0, 2)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ppicn")
+
+[node name="Decor" type="Parallax2D" parent="."]
+
+[node name="Fond" type="Sprite2D" parent="Decor"]
+position = Vector2(3525.5, -155.53465)
+scale = Vector2(4.6775, 4.0553465)
+texture = ExtResource("2_2m4lo")
+
+[node name="Joueur" type="CharacterBody2D" parent="."]
+position = Vector2(-3, 70)
+script = ExtResource("3_crqbl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Joueur"]
+position = Vector2(-712.25006, -4)
+scale = Vector2(0.99999994, 1)
+shape = SubResource("RectangleShape2D_f42tj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Joueur"]
+position = Vector2(-708.99994, -24)
+scale = Vector2(1.3037107, 1.171875)
+sprite_frames = ExtResource("2_ndxm0")
+autoplay = "default"
+frame_progress = 0.79954106
+speed_scale = 4.535
+
+[node name="Camera2D" type="Camera2D" parent="Joueur"]
+position = Vector2(-511.25, -152)
+position_smoothing_enabled = true
+
+[node name="Minotaure" type="Area2D" parent="."]
+position = Vector2(-370, -240)
+script = ExtResource("5_yc7jj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Minotaure"]
+position = Vector2(-331.00003, -83.375)
+scale = Vector2(1.3593749, 1.3535156)
+sprite_frames = ExtResource("3_vgbti")
+autoplay = "default"
+speed_scale = 5.0
+
+[node name="MinotaureMort" type="AnimatedSprite2D" parent="Minotaure"]
+visible = false
+position = Vector2(-95, -62.625)
+scale = Vector2(1.3593749, 1.3535156)
+sprite_frames = ExtResource("4_hwifx")
+frame_progress = 1.0
+speed_scale = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minotaure"]
+position = Vector2(-341, -61.375)
+shape = SubResource("RectangleShape2D_4fg0w")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+offset = Vector2(0, -0.08)
+transform = Transform2D(1, 0, 0, 1, 0, -0.08)
+
+[node name="FiltreRouge" type="ColorRect" parent="HUD"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7176471, 0.09019608, 0.16862746, 0.30588236)
+
+[node name="UI_Container" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 9.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Affichage" type="Label" parent="HUD/UI_Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.058000002
+anchor_bottom = 0.018000001
+offset_left = 896.0
+offset_top = 12.08
+offset_right = 1181.1841
+offset_bottom = 56.416
+theme_override_fonts/font = ExtResource("8_crqbl")
+theme_override_font_sizes/font_size = 20
+text = "Distance parcourue: "
+
+[node name="Label" type="Label" parent="HUD/UI_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4470486
+anchor_top = 0.3441358
+anchor_right = 0.5642361
+anchor_bottom = 0.40895063
+offset_bottom = 1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("8_crqbl")
+theme_override_font_sizes/font_size = 30
+text = "Victoire ! "
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD/UI_Container"]
+layout_mode = 0
+offset_left = 904.0
+offset_top = 82.0
+offset_right = 1227.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("8_crqbl")
+theme_override_styles/background = SubResource("StyleBoxFlat_4fg0w")
+
+[node name="PlayButton" type="Button" parent="HUD/UI_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4079861
+anchor_top = 0.45833334
+anchor_right = 0.59375
+anchor_bottom = 0.51080245
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_crqbl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_eeeln")
+text = "Rejouer"
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="HUD/UI_Container"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.40885416
+anchor_top = 0.5324074
+anchor_right = 0.59375
+anchor_bottom = 0.587963
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_crqbl")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rsfer")
+text = "Quitter"
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_awipg")
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="HUD/UI_Container/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HUD/UI_Container/QuitButton" to="." method="_on_quit_button_pressed"]

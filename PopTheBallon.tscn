@@ -1,0 +1,149 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfr0vwlwo6jpl"]
+
+[ext_resource type="Texture2D" uid="uid://dv56gcrju55b2" path="res://popTheBallon/images/FondBaloon.png" id="1_1v6gi"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="1_a6mh2"]
+[ext_resource type="Script" uid="uid://don2bb7wgc5yy" path="res://game_area.gd" id="1_v2lfg"]
+[ext_resource type="Texture2D" uid="uid://dooomprxm7quo" path="res://popTheBallon/images/ballon.png" id="3_fsbdh"]
+[ext_resource type="AudioStream" uid="uid://d24cp4g3fwvc2" path="res://sounds/BallonPop.mp3" id="4_w4oxd"]
+[ext_resource type="AudioStream" uid="uid://dyfheax7di0g" path="res://sounds/StartingSouns.mp3" id="5_w4oxd"]
+[ext_resource type="AudioStream" uid="uid://dlkalfgg1rkp2" path="res://sounds/BallonFail.mp3" id="6_fsbdh"]
+[ext_resource type="AudioStream" uid="uid://f7ddufg0gssq" path="res://sounds/MusiqueCirque.mp3" id="8_1v6gi"]
+
+[node name="PopTheBallon" type="CanvasLayer"]
+
+[node name="Decor" type="Parallax2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Decor"]
+position = Vector2(647, 349)
+scale = Vector2(0.5126405, 0.48736703)
+texture = ExtResource("1_1v6gi")
+
+[node name="MainUI" type="Control" parent="."]
+custom_minimum_size = Vector2(550, 600)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -300.0
+offset_right = 275.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainUI"]
+layout_mode = 0
+offset_right = 583.0
+offset_bottom = 549.0
+color = Color(0, 0, 0, 0.40784314)
+
+[node name="ScoreLabel" type="Label" parent="MainUI"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 35.0
+offset_bottom = 112.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_a6mh2")
+theme_override_font_sizes/font_size = 40
+text = "NaN"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="GameArea" type="Control" parent="MainUI"]
+top_level = true
+z_index = 2
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -225.0
+offset_right = 225.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v2lfg")
+
+[node name="Target" type="TextureButton" parent="MainUI/GameArea"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 256.0
+action_mode = 0
+texture_normal = ExtResource("3_fsbdh")
+stretch_mode = 0
+
+[node name="LifeContainer" type="GridContainer" parent="MainUI"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 20.0
+offset_bottom = 70.0
+grow_horizontal = 0
+columns = 2
+
+[node name="Life1" type="TextureRect" parent="MainUI/LifeContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Life2" type="TextureRect" parent="MainUI/LifeContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="InfoLabel" type="Label" parent="MainUI"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -51.0
+offset_right = 214.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_a6mh2")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BallonPop" type="AudioStreamPlayer2D" parent="MainUI"]
+position = Vector2(-365, -60)
+stream = ExtResource("4_w4oxd")
+
+[node name="StartSound" type="AudioStreamPlayer2D" parent="MainUI"]
+position = Vector2(-365, -60)
+stream = ExtResource("5_w4oxd")
+volume_db = -6.891
+
+[node name="LooseSound" type="AudioStreamPlayer2D" parent="MainUI"]
+position = Vector2(-365, -60)
+stream = ExtResource("6_fsbdh")
+
+[node name="BallonFail" type="AudioStreamPlayer2D" parent="MainUI"]
+position = Vector2(-365, -60)
+stream = ExtResource("6_fsbdh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_1v6gi")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="pressed" from="MainUI/GameArea/Target" to="MainUI/GameArea" method="_on_target_pressed"]

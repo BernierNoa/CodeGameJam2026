@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cme4dwdb76dl8"]
+
+[ext_resource type="Texture2D" uid="uid://bdm7ed1r3m2ai" path="res://images/saloon.png" id="1_mvxag"]
+
+[sub_resource type="GDScript" id="GDScript_mvxag"]
+resource_name = "saloon"
+script/source = "extends Sprite2D
+
+func _ready():
+	# Connexion au signal global
+	signal_manager.interact_goblet_victoire.connect(on_goblet_victoire)
+	
+	# On change la frame de l'objet lui-même (self)
+	frame = 0 
+
+func on_goblet_victoire():
+	# Quand on gagne, on change l'image
+	frame = 1
+"
+
+[node name="saloon" type="Sprite2D"]
+texture = ExtResource("1_mvxag")
+hframes = 2
+script = SubResource("GDScript_mvxag")

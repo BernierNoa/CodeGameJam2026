@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://clvmuyru0i2y0"]
+
+[ext_resource type="Script" uid="uid://b67choe5hvrat" path="res://gobelet_game.gd" id="1_g4qiy"]
+[ext_resource type="Texture2D" uid="uid://ca2c4004vt6hr" path="res://Images/ball.png" id="2_hmr3k"]
+
+[node name="GobeletGame" type="Node2D"]
+script = ExtResource("1_g4qiy")
+
+[node name="Balle" type="Sprite2D" parent="."]
+position = Vector2(209.75006, 280.25006)
+scale = Vector2(0.06567376, 0.059326116)
+texture = ExtResource("2_hmr3k")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(554, 307)

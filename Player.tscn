@@ -1,0 +1,268 @@
+[gd_scene load_steps=15 format=3 uid="uid://b7w1loc1dwbsc"]
+
+[ext_resource type="Texture2D" uid="uid://y7k71gf8vdde" path="res://main/image/player.png" id="1_bod2y"]
+
+[sub_resource type="GDScript" id="GDScript_8wkq3"]
+resource_name = "joueur"
+script/source = "extends CharacterBody2D
+
+enum Etat {
+	idle,
+	run,
+	attack,
+	dead	
+}
+
+const POPBALLON_SCENE = \"res://PopTheBallon.tscn\"
+
+@export_category(\"Statistique\")
+@export var vitesse: int = 400
+@export var gravite: int = 1500
+
+@export var X_MIN: int = -2350
+@export var X_MAX: int = 4060
+
+var etat: Etat = Etat.idle
+var move_direction: Vector2 = Vector2.ZERO
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_playback: AnimationNodeStateMachinePlayback = animation_tree[\"parameters/playback\"]
+
+@onready var all_interaction = []
+@onready var interactLabel = $\"Interaction Components\".get_node(\"InteractLabel\")
+
+
+
+func _ready() -> void:
+	animation_tree.active = true
+
+func _physics_process(delta: float) -> void:
+	#apply_gravity(delta)
+	handle_movement()
+	update_state()
+	update_animation()
+	move_and_slide()
+	
+		
+	
+	if Input.is_action_just_pressed(\"Interact\"):
+		execute_interaction()
+
+# -----------------------------
+# GRAVITÉ (non appliquer)
+# -----------------------------
+func apply_gravity(delta: float) -> void:
+	if not is_on_floor():
+		velocity.y += gravite * delta
+	else:
+		velocity.y = 0
+
+# -----------------------------
+# MOUVEMENT
+# -----------------------------
+func handle_movement() -> void:
+	move_direction.x = int(Input.is_action_pressed(\"ui_right\")) - int(Input.is_action_pressed(\"ui_left\"))
+
+	# Vérifie si le joueur peut bouger horizontalement
+	if (global_position.x > X_MIN or move_direction.x > 0) and (global_position.x < X_MAX or move_direction.x < 0):
+		velocity.x = move_direction.x * vitesse
+	else:
+		velocity.x = 0
+	
+
+	# Flip du sprite
+	if move_direction.x < 0:
+		sprite.flip_h = true
+	elif move_direction.x > 0:
+		sprite.flip_h = false
+
+# -----------------------------
+# ÉTATS
+# -----------------------------
+func update_state() -> void:
+	if etat == Etat.dead:
+		return
+
+	if move_direction.x != 0:
+		etat = Etat.run
+	else:
+		etat = Etat.idle
+
+# -----------------------------
+# ANIMATIONS
+# -----------------------------
+func update_animation() -> void:
+	match etat:
+		Etat.idle:
+			if animation_playback.get_current_node() != \"idle\":
+				animation_playback.travel(\"idle\")
+		Etat.run:
+			if animation_playback.get_current_node() != \"run\":
+				animation_playback.travel(\"run\")
+
+
+# Méthode d'intéraction
+
+
+func _on_interation_area_area_entered(area: Area2D) -> void:
+	all_interaction.insert(0, area)
+	update_interactions()
+
+func _on_interation_area_area_exited(area: Area2D) -> void:
+	all_interaction.erase(area)
+	update_interactions()
+
+func update_interactions():
+	if all_interaction:
+		interactLabel.text = all_interaction[0].interact_label
+	else:
+		interactLabel.text = \"\"
+		
+func StartBallon():
+	print(\"StartingBallon\")
+	get_tree().change_scene_to_file(POPBALLON_SCENE)
+	
+		
+func execute_interaction():
+	if all_interaction:
+		var cur_interaction = all_interaction[0]
+		match cur_interaction.interact_type:
+			\"interact_ballon\" : StartBallon()
+			\"interact_clicker\" : signal_manager.interact_clicker.emit()
+			\"interact_junggle\": signal_manager.interact_junggle.emit()
+			\"interact_goblet\": signal_manager.interact_goblet.emit()
+			\"interact_cookies\": signal_manager.interact_cookies.emit()
+			# minotaure a modif
+			\"interact_boss\" : signal_manager.interact_boss.emit()
+			
+				
+			
+			
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_73aww"]
+size = Vector2(5.620937, 47.683346)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8wkq3"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m51wm"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_73aww"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_53hak"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pbrmn"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yagn1"]
+states/Start/position = Vector2(195, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_8wkq3")
+states/idle/position = Vector2(358, 128)
+states/run/node = SubResource("AnimationNodeAnimation_m51wm")
+states/run/position = Vector2(625, 161)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_73aww"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_53hak"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pbrmn")]
+
+[sub_resource type="Animation" id="Animation_p546a"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_m6r22"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.125
+
+[sub_resource type="Animation" id="Animation_kbuoo"]
+resource_name = "run"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l2r2y"]
+_data = {
+&"RESET": SubResource("Animation_p546a"),
+&"idle": SubResource("Animation_m6r22"),
+&"run": SubResource("Animation_kbuoo")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bod2y"]
+size = Vector2(49.5, 47)
+
+[node name="Player" type="CharacterBody2D"]
+script = SubResource("GDScript_8wkq3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.9073486e-06, -9.536743e-07)
+scale = Vector2(0.6652244, 0.66852677)
+texture = ExtResource("1_bod2y")
+hframes = 12
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -60)
+zoom = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.49999988, 19.5)
+scale = Vector2(3.3802195, 0.9856691)
+shape = SubResource("RectangleShape2D_73aww")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_yagn1")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_l2r2y")
+}
+
+[node name="Interaction Components" type="Node2D" parent="."]
+z_index = 1
+
+[node name="Interation area" type="Area2D" parent="Interaction Components"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction Components/Interation area"]
+position = Vector2(0, 19)
+shape = SubResource("RectangleShape2D_bod2y")
+
+[node name="InteractLabel" type="Label" parent="Interaction Components"]
+offset_left = -21.0
+offset_top = -66.0
+offset_right = 19.0
+offset_bottom = -43.0
+size_flags_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="area_entered" from="Interaction Components/Interation area" to="." method="_on_interation_area_area_entered"]
+[connection signal="area_exited" from="Interaction Components/Interation area" to="." method="_on_interation_area_area_exited"]

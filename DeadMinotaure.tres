@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://caux0jognkl5a"]
+
+[ext_resource type="Texture2D" uid="uid://do4rwxqrpjjk4" path="res://minotaure/Dead_Minotaure.png" id="1_yuiyy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gmhg"]
+atlas = ExtResource("1_yuiyy")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76n50"]
+atlas = ExtResource("1_yuiyy")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvm5e"]
+atlas = ExtResource("1_yuiyy")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1xmc"]
+atlas = ExtResource("1_yuiyy")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7k8f"]
+atlas = ExtResource("1_yuiyy")
+region = Rect2(512, 0, 128, 128)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gmhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76n50")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvm5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1xmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7k8f")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]

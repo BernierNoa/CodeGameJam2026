@@ -1,0 +1,87 @@
+[gd_scene load_steps=17 format=3 uid="uid://c008n5dn8s7ma"]
+
+[ext_resource type="Script" uid="uid://cwgwrifm5hrxl" path="res://introduction.gd" id="1_5s2tw"]
+[ext_resource type="AudioStream" uid="uid://bviji1j7lmtpo" path="res://introduction/sounds/PremierePhrase.mp3" id="2_gla6j"]
+[ext_resource type="AudioStream" uid="uid://c13x0mbqd63ry" path="res://introduction/sounds/DeuxiemePhrase.mp3" id="3_b8871"]
+[ext_resource type="AudioStream" uid="uid://cpx34hwqx8b4h" path="res://introduction/sounds/TroisiemePhrase.mp3" id="4_p0qed"]
+[ext_resource type="AudioStream" uid="uid://li1u5aphhyvp" path="res://introduction/sounds/4phrase.mp3" id="5_m833v"]
+[ext_resource type="AudioStream" uid="uid://cph1orjsgdy2n" path="res://introduction/sounds/CinquiemePhrase.mp3" id="6_6dt4o"]
+[ext_resource type="AudioStream" uid="uid://cnunkdhm8yme7" path="res://introduction/sounds/6phrase.mp3" id="7_okrhb"]
+[ext_resource type="AudioStream" uid="uid://dnnat5417phhx" path="res://introduction/sounds/7phrase.mp3" id="8_txomj"]
+[ext_resource type="AudioStream" uid="uid://ijcyabu4qfdc" path="res://introduction/sounds/8phrase.mp3" id="9_k5jbp"]
+[ext_resource type="AudioStream" uid="uid://cbhfn8e0pfsp4" path="res://introduction/sounds/9phrase.mp3" id="10_n4far"]
+[ext_resource type="AudioStream" uid="uid://cb7mnhfaw3l8p" path="res://introduction/sounds/10phrase.mp3" id="11_wcm0y"]
+[ext_resource type="AudioStream" uid="uid://b1nbjhqd0u1dp" path="res://introduction/sounds/11phrase.mp3" id="12_45kru"]
+[ext_resource type="AudioStream" uid="uid://ihw4yl5goebh" path="res://introduction/sounds/12phrase.mp3" id="13_j05op"]
+[ext_resource type="AudioStream" uid="uid://c4l0nxktihb4q" path="res://introduction/sounds/FIN.mp3" id="14_dxtn0"]
+[ext_resource type="Texture2D" uid="uid://dojpt3bxqtioq" path="res://introduction/images/maire.png" id="15_wr1ee"]
+[ext_resource type="AudioStream" uid="uid://clj8ey7dqinp" path="res://introduction/sounds/epic-cinematic-piano-amp-strings-motivational-background-music-013-447621.mp3" id="16_qwa76"]
+
+[node name="IntroHistoire" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5s2tw")
+liste_voix = Array[AudioStream]([ExtResource("2_gla6j"), ExtResource("3_b8871"), ExtResource("4_p0qed"), ExtResource("5_m833v"), ExtResource("6_6dt4o"), ExtResource("7_okrhb"), ExtResource("8_txomj"), ExtResource("9_k5jbp"), ExtResource("10_n4far"), ExtResource("11_wcm0y"), ExtResource("12_45kru"), ExtResource("13_j05op"), ExtResource("14_dxtn0")])
+
+[node name="Fond" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.53900033, 0.53900033, 0.53900033, 1)
+
+[node name="MoyerSprit" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = -306.0
+offset_right = 204.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_wr1ee")
+
+[node name="DialogBox" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -170.0
+offset_right = -50.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="DialogTest" type="RichTextLabel" parent="DialogBox"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 30
+
+[node name="MusiqueFond" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_qwa76")
+volume_db = -31.84
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

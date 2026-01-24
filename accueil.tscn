@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkvl3eir72mea"]
+
+[ext_resource type="Script" uid="uid://dt58glp75xxh7" path="res://accueil.gd" id="1_wjnm5"]
+[ext_resource type="Texture2D" uid="uid://6p7mhfxq68n6" path="res://titleScreen/images/Background.png" id="2_e7el7"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="2_mr1wo"]
+[ext_resource type="Texture2D" uid="uid://7527tc121r0c" path="res://titleScreen/images/LogoCodeGameJam.png" id="3_w3kyk"]
+[ext_resource type="Texture2D" uid="uid://drlrhpu1t7phm" path="res://titleScreen/images/logoDuJeu.png" id="4_2063g"]
+[ext_resource type="Texture2D" uid="uid://c8f252qc0eove" path="res://titleScreen/images/engrenage.png" id="6_jein4"]
+
+[node name="Accueil" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wjnm5")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_e7el7")
+expand_mode = 3
+
+[node name="LogoCodeGameJam" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -88.0
+offset_right = 88.0
+grow_vertical = 0
+texture = ExtResource("3_w3kyk")
+
+[node name="LogoDuJeu" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -336.5
+offset_right = 336.5
+offset_bottom = 371.0
+grow_horizontal = 2
+texture = ExtResource("4_2063g")
+
+[node name="sonmenu" type="AudioStreamPlayer" parent="."]
+
+[node name="musiqueMenu" type="AudioStreamPlayer" parent="."]
+
+[node name="container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = 12.0
+offset_right = 177.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="boutonJouer" type="Button" parent="container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mr1wo")
+theme_override_font_sizes/font_size = 30
+text = "JOUER"
+
+[node name="boutonSandbox" type="Button" parent="container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mr1wo")
+theme_override_font_sizes/font_size = 30
+text = "SANDBOX
+"
+
+[node name="boutonCredit" type="Button" parent="container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mr1wo")
+theme_override_font_sizes/font_size = 30
+text = "CRÉDITS"
+
+[node name="Parametre" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -96.0
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("6_jein4")

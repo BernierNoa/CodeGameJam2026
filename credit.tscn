@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwv5jubqdywnx"]
+
+[ext_resource type="Script" uid="uid://c4r0i5lwxfdk5" path="res://credit.gd" id="1_pxe7y"]
+[ext_resource type="Texture2D" uid="uid://6p7mhfxq68n6" path="res://titleScreen/images/Background.png" id="2_2l348"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="2_5wfih"]
+[ext_resource type="AudioStream" uid="uid://bqfo7lb76yer4" path="res://sounds/MenuMusic.mp3" id="4_2l348"]
+
+[node name="credit" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pxe7y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2l348")
+
+[node name="boutonRetour" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -80.0
+offset_right = 102.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_5wfih")
+text = "Retour Accueil"
+
+[node name="participant" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -194.5
+offset_right = 257.5
+offset_bottom = 194.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-423, -262)
+theme_override_fonts/font = ExtResource("2_5wfih")
+text = "DA ROSA SIMOES Bernardo (Leader - Devloppeur)
+DOLIDON Clémence (Arts - Game Design)
+Pechon Loïc (Developpeur)
+VULQUIN Terrence (Developpeur)
+ROLLET Isack (Sounds - Developpeur)
+ROLLAND Raph	ael (Storyboard)
+BERNIER Noa (Developpeur)
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="musiqueMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2l348")
+
+[connection signal="pressed" from="boutonRetour" to="." method="_on_bouton_retour_pressed"]

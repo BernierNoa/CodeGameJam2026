@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://djpvt8pgjyyfh"]
+
+[ext_resource type="Texture2D" uid="uid://rqohirkkoo0o" path="res://main/image/chinois.png" id="1_tnxfi"]
+[ext_resource type="PackedScene" path="res://interaction.tscn" id="1_wrxa2"]
+
+[sub_resource type="Animation" id="Animation_yl428"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9]
+}
+
+[sub_resource type="Animation" id="Animation_0gbwx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gr61v"]
+_data = {
+&"RESET": SubResource("Animation_0gbwx"),
+&"idle": SubResource("Animation_yl428")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s6hox"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5fyfs"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_b4ygb"]
+states/idle/node = SubResource("AnimationNodeAnimation_s6hox")
+states/idle/position = Vector2(291, 113)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_5fyfs")]
+
+[node name="chinois" type="Sprite2D"]
+position = Vector2(24.499996, -22.500004)
+scale = Vector2(1.5104166, 1.46875)
+texture = ExtResource("1_tnxfi")
+hframes = 10
+
+[node name="Interaction" parent="." instance=ExtResource("1_wrxa2")]
+position = Vector2(0, 23)
+interact_label = "E: Parler au Samourai"
+interact_type = "interact_cookies"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gr61v")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_b4ygb")
+anim_player = NodePath("../AnimationPlayer")

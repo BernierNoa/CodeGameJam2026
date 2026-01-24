@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://debdebmi4x7pm"]
+
+[ext_resource type="Script" uid="uid://c4qlg0w2w3itj" path="res://juggles_start.gd" id="1_2clpa"]
+[ext_resource type="Texture2D" uid="uid://c5utqhqskutbq" path="res://juggles/images/FondCirque.png" id="2_t85we"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="3_o7nd1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gljim"]
+bg_color = Color(0.83137256, 0.2509804, 0.30588236, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_py00f"]
+bg_color = Color(0.31764707, 0.5647059, 0.77254903, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 3
+
+[node name="JugglesStart" type="Node2D"]
+script = ExtResource("1_2clpa")
+
+[node name="Decor" type="Parallax2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Decor"]
+position = Vector2(577, 340.00003)
+scale = Vector2(0.45276988, 0.47473404)
+texture = ExtResource("2_t85we")
+
+[node name="Titre" type="Label" parent="."]
+offset_left = 384.0
+offset_top = 133.0
+offset_right = 856.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+theme_override_constants/shadow_offset_y = 6
+theme_override_fonts/font = ExtResource("3_o7nd1")
+theme_override_font_sizes/font_size = 40
+text = "Juggles Party"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="SousTitre" type="Label" parent="."]
+offset_left = 423.0
+offset_top = 237.0
+offset_right = 815.0
+offset_bottom = 321.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.39215687)
+theme_override_constants/shadow_offset_y = 6
+theme_override_fonts/font = ExtResource("3_o7nd1")
+theme_override_font_sizes/font_size = 20
+text = "Soit le meilleur jongleur"
+horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 516.0
+offset_top = 387.0
+offset_right = 724.0
+offset_bottom = 446.0
+theme_override_fonts/font = ExtResource("3_o7nd1")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_gljim")
+text = "Quitter"
+
+[node name="PlayButton" type="Button" parent="."]
+offset_left = 516.0
+offset_top = 316.0
+offset_right = 724.0
+offset_bottom = 375.0
+theme_override_fonts/font = ExtResource("3_o7nd1")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_py00f")
+text = "Jouer"
+
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

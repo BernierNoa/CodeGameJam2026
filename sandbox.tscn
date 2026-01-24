@@ -1,0 +1,264 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfomnlt8ndtoy"]
+
+[ext_resource type="Texture2D" uid="uid://6p7mhfxq68n6" path="res://titleScreen/images/Background.png" id="1_0fpt2"]
+[ext_resource type="FontFile" uid="uid://bsos8gntr1mhy" path="res://fonts/Pixeled.ttf" id="2_cojph"]
+[ext_resource type="Texture2D" uid="uid://dtlvmtteno7ya" path="res://titleScreen/images/JeuballonIcone.png" id="4_igx0j"]
+[ext_resource type="Texture2D" uid="uid://d3g2frkxjvu7r" path="res://icon.svg" id="4_rjrbw"]
+[ext_resource type="Texture2D" uid="uid://c3ntdpkuni3yq" path="res://titleScreen/images/HatClickerIcone.png" id="5_tctsc"]
+[ext_resource type="Texture2D" uid="uid://dsx5nvbwxit8s" path="res://titleScreen/images/MinotaureRaceIcone.png" id="7_ai2o8"]
+[ext_resource type="AudioStream" uid="uid://b34q5n83jnud4" path="res://sounds/MenuSelection.wav" id="7_igx0j"]
+[ext_resource type="AudioStream" uid="uid://bqfo7lb76yer4" path="res://sounds/MenuMusic.mp3" id="8_0fpt2"]
+
+[sub_resource type="GDScript" id="GDScript_fyipq"]
+script/source = "extends Control
+
+# Définition du chemin vers la scène du jeu ballon
+const SCENE_ACCUEIL = \"res://accueil.tscn\"
+const SCENE_SANDBOX = \"res://sandbox.tscn\" 
+const SCENE_CREDITS = \"res://credit.tscn\" 
+const POPTHEBALLON_SCENE = \"res://PopTheBallon.tscn\"
+const MINOTAURE_SCENE = \"res://main_menu.tscn\"
+const GOBELET_SCENE = \"res://gobelet_debut.tscn\"
+const JUGGLES_SCENE = \"res://juggles_start.tscn\"
+
+
+@onready var container = $GridContainer
+
+func _ready():
+	if has_node(\"musiqueMenu\"):
+		$musiqueMenu.play()
+
+func _on_bouton_retour_pressed():
+	if has_node(\"sonmenu\"):
+		$sonmenu.play()
+		await $sonmenu.finished
+	get_tree().change_scene_to_file(SCENE_ACCUEIL)
+
+func _on_bouton_ballon_pressed() -> void:
+	if has_node(\"sonmenu\"):
+		$sonmenu.play()
+
+	get_tree().change_scene_to_file(POPTHEBALLON_SCENE)
+	
+func _on_bouton_minotaure_pressed() -> void:
+	if has_node(\"sonmenu\"):
+		$sonmenu.play()
+	
+	get_tree().change_scene_to_file(MINOTAURE_SCENE)
+
+func _on_bouton_chapeau_pressed() -> void:
+	if has_node(\"sonmenu\"):
+		$sonmenu.play()
+	get_tree().change_scene_to_file(GOBELET_SCENE)
+
+func _on_bouton_juggles_pressed() -> void:
+	if has_node(\"sonmenu\"):
+		$sonmenu.play()
+	get_tree().change_scene_to_file(JUGGLES_SCENE)
+"
+
+[node name="sandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_fyipq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0fpt2")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.0
+offset_top = -150.0
+offset_right = 506.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="jeuBalloon" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="boutonBallon" type="Button" parent="GridContainer/jeuBalloon"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -59.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cojph")
+theme_override_font_sizes/font_size = 18
+text = "Pop Balloon"
+
+[node name="icone" type="TextureRect" parent="GridContainer/jeuBalloon"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_igx0j")
+
+[node name="JeuChapeau" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="boutonChapeau" type="Button" parent="GridContainer/JeuChapeau"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -59.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cojph")
+theme_override_font_sizes/font_size = 18
+text = "Hat Clicker
+"
+
+[node name="icone" type="TextureRect" parent="GridContainer/JeuChapeau"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_tctsc")
+
+[node name="jeuJuggles" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="boutonJuggles" type="Button" parent="GridContainer/jeuJuggles"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -59.0
+offset_right = 96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cojph")
+theme_override_font_sizes/font_size = 18
+text = "Fortun Clicker"
+
+[node name="icone" type="TextureRect" parent="GridContainer/jeuJuggles"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_rjrbw")
+
+[node name="jeuMinotaure" type="Panel" parent="GridContainer"]
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 2
+
+[node name="boutonMinotaure" type="Button" parent="GridContainer/jeuMinotaure"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -54.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cojph")
+text = "Minotaure Race"
+
+[node name="icone" type="TextureRect" parent="GridContainer/jeuMinotaure"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 100.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ai2o8")
+
+[node name="boutonRetour" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -78.0
+offset_right = 102.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_cojph")
+text = "Retour Accueil"
+
+[node name="sonMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_igx0j")
+
+[node name="musiqueMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0fpt2")
+
+[connection signal="pressed" from="GridContainer/jeuBalloon/boutonBallon" to="." method="_on_jeu_ballon_pressed"]
+[connection signal="pressed" from="GridContainer/jeuBalloon/boutonBallon" to="." method="_on_bouton_ballon_pressed"]
+[connection signal="pressed" from="GridContainer/JeuChapeau/boutonChapeau" to="." method="_on_bouton_chapeau_pressed"]
+[connection signal="pressed" from="GridContainer/jeuJuggles/boutonJuggles" to="." method="_on_bouton_juggles_pressed"]
+[connection signal="pressed" from="GridContainer/jeuMinotaure/boutonMinotaure" to="." method="_on_bouton_minotaure_pressed"]
+[connection signal="pressed" from="boutonRetour" to="." method="_on_bouton_retour_pressed"]

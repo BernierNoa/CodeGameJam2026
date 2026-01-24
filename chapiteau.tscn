@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbo2gejxd1fwn"]
+
+[ext_resource type="Texture2D" uid="uid://c5y2gx58f21v3" path="res://main/image/chapiteau.png" id="1_akpv6"]
+
+[sub_resource type="GDScript" id="GDScript_3i8fw"]
+resource_name = "chapiteau"
+script/source = "extends Sprite2D
+
+func _ready():
+	# Connexion au signal global
+	signal_manager.interact_ballon_victoire.connect(on_ballon_victoire)
+	
+	# On change la frame de l'objet lui-même (self)
+	frame = 0 
+
+func on_ballon_victoire():
+	# Quand on gagne, on change l'image
+	frame = 1
+
+	
+"
+
+[node name="chapiteau" type="Sprite2D"]
+z_as_relative = false
+position = Vector2(-49, -72)
+texture = ExtResource("1_akpv6")
+centered = false
+hframes = 3
+script = SubResource("GDScript_3i8fw")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b58siwcd21luk"]
+
+[ext_resource type="Texture2D" uid="uid://f24nofunw0fc" path="res://images/chinabuilding.png" id="1_6n7vo"]
+
+[node name="chinabuilding" type="Sprite2D"]
+texture = ExtResource("1_6n7vo")
+hframes = 2
+frame = 1
