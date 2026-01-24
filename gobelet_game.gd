@@ -186,7 +186,8 @@ func _on_gobelet_selectionne(gobelet):
 				if is_instance_valid(g): g.queue_free()
 			liste_gobelets.clear()
 			
-			# emit_signal("goblet_victoire") # Décommente si tu as déclaré le signal en haut
+			# Émission du signal de victoire
+			signal_manager.interact_goblet_victoire.emit()
 		else:
 			await get_tree().create_timer(1.5).timeout
 			demarrer_manche()

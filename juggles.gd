@@ -93,7 +93,7 @@ func game_over():
 	soustitre.visible = true
 	if(temps_ecoule >= 30):
 		soustitre.text = "Temps tenu : " + str(temps_ecoule) + " secondes\n Le batiment est réparé !"
-		emit_signal("juggles_victoire")
+		signal_manager.interact_junggle_victoire.emit()
 
 	else:
 		soustitre.text = "Temps tenu : " + str(temps_ecoule) + " secondes"
