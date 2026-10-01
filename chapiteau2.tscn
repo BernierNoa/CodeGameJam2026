@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2jkd5xq8w3k2"]
+
+[ext_resource type="Texture2D" uid="uid://c5y2gx58f21v3" path="res://main/image/chapiteau.png" id="1_chapiteau"]
+
+[sub_resource type="GDScript" id="GDScript_chapiteau2"]
+resource_name = "chapiteau2"
+script/source = "extends Sprite2D
+
+func _ready():
+	# Connexion au signal global
+	signal_manager.interact_goblet_victoire.connect(on_goblet_victoire)
+	
+	# Frame 0 : état initial (chapiteau non réparé)
+	frame = 0
+
+func on_goblet_victoire():
+	# Frame 1 : état réparé (après victoire au jeu des gobelets)
+	frame = 1
+"
+
+[node name="chapiteau2" type="Sprite2D"]
+z_as_relative = false
+position = Vector2(0, 0)
+texture = ExtResource("1_chapiteau")
+centered = false
+hframes = 3
+script = SubResource("GDScript_chapiteau2")

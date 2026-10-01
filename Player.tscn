@@ -114,10 +114,11 @@ func _on_interation_area_area_exited(area: Area2D) -> void:
 	update_interactions()
 
 func update_interactions():
-	if all_interaction:
+	if all_interaction.size() > 0:
 		interactLabel.text = all_interaction[0].interact_label
+		interactLabel.visible = true
 	else:
-		interactLabel.text = \"\"
+		interactLabel.visible = false
 		
 func StartBallon():
 	print(\"StartingBallon\")
@@ -125,16 +126,31 @@ func StartBallon():
 	
 		
 func execute_interaction():
-	if all_interaction:
+	if all_interaction.size() > 0:
 		var cur_interaction = all_interaction[0]
+		
 		match cur_interaction.interact_type:
-			\"interact_ballon\" : StartBallon()
-			\"interact_clicker\" : signal_manager.interact_clicker.emit()
-			\"interact_junggle\": signal_manager.interact_junggle.emit()
-			\"interact_goblet\": signal_manager.interact_goblet.emit()
-			\"interact_cookies\": signal_manager.interact_cookies.emit()
-			# minotaure a modif
-			\"interact_boss\" : signal_manager.interact_boss.emit()
+			\"interact_ballon\":
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://PopTheBallon.tscn\")
+			
+			\"interact_goblet\":
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://gobelet_debut.tscn\")
+			
+			\"interact_junggle\":
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://juggles_start.tscn\")
+			
+			\"interact_boss\":
+				signal_manager.position_joueur_sauvegardee = global_position
+				get_tree().change_scene_to_file(\"res://main_menu.tscn\")
+			
+			\"interact_cookies\":
+				print(\"Interaction cookies - À implémenter\")
+			
+			_:
+				print(\"Type d'interaction inconnu : \", cur_interaction.interact_type)
 			
 				
 			

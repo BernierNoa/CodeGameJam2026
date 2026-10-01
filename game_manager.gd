@@ -142,7 +142,7 @@ func _process(delta):
 		label_affichage.visible = true
 		playbutton.visible = true
 		quitbutton.visible = true # Arrête le jeu
-		emit_signal("boss_victoire")
+		signal_manager.interact_boss_victoire.emit()
 
 func changer_phase(nouvelle_phase, vitesse_minotaure):
 	if phase_actuelle == nouvelle_phase:
