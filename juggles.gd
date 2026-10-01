@@ -92,9 +92,12 @@ func game_over():
 	titre.visible = true
 	soustitre.visible = true
 	if(temps_ecoule >= 30):
+		# Marquer le bâtiment comme réparé
+		signal_manager.marquer_batiment_repare("jonglage")
+		signal_manager.interact_junggle_victoire.emit()
+		
 		soustitre.text = "Temps tenu : " + str(temps_ecoule) + " secondes\n Le batiment est réparé !"
-		emit_signal("juggles_victoire")
-
+		print("[Juggles] Victoire! Bâtiment réparé")
 	else:
 		soustitre.text = "Temps tenu : " + str(temps_ecoule) + " secondes"
 	quitbutton.visible = true
@@ -109,7 +112,8 @@ func spawner_balle():
 	add_child(nouvelle_balle)
 
 func _on_quit_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://juggles_start.tscn")
+	print("[Juggles] Retour à la carte")
+	get_tree().change_scene_to_file("res://map.tscn")
 
 func _on_play_button_pressed() -> void:
 	# CORRECTION IMPORTANTE : reload() n'existe pas, il faut reload_current_scene()

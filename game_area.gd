@@ -102,9 +102,10 @@ func gameLoop():
 	while game:
 		
 		if score >= 10 and mode == "basic":
-			signal_manager.batiments_repares["ballon"] = true
+			# Marquer le bâtiment comme réparé
+			signal_manager.marquer_batiment_repare("ballon")
 			signal_manager.interact_ballon_victoire.emit()
-			print("Ended")
+			print("[PopTheBallon] Victoire! Retour à la carte")
 			get_tree().change_scene_to_file(MAIN_SCENE)
 			return
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsfi8q4qmvxws"]
+[gd_scene load_steps=17 format=3 uid="uid://dsfi8q4qmvxws"]
 
 [ext_resource type="Texture2D" uid="uid://c63qq8dd5qmja" path="res://main/image/decord.png" id="1_gqbix"]
 [ext_resource type="Texture2D" uid="uid://1vce6u17elmn" path="res://main/image/background.png" id="2_pf70i"]
@@ -7,36 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://djpvt8pgjyyfh" path="res://chinois.tscn" id="5_nrw0r"]
 [ext_resource type="PackedScene" uid="uid://drihxqgm85inh" path="res://fermier.tscn" id="6_02n23"]
 [ext_resource type="PackedScene" uid="uid://dbo2gejxd1fwn" path="res://chapiteau.tscn" id="7_kse76"]
+[ext_resource type="Texture2D" uid="uid://bul5n0yropa1e" path="res://main/image/ClownBoule.png" id="8_6qsgm"]
 [ext_resource type="PackedScene" uid="uid://cme4dwdb76dl8" path="res://saloon.tscn" id="8_8cume"]
 [ext_resource type="PackedScene" uid="uid://b58siwcd21luk" path="res://chinabuilding.tscn" id="9_dysp3"]
-
-[sub_resource type="GDScript" id="GDScript_krxrc"]
-script/source = "extends Node2D
-
-@onready var music: AudioStreamPlayer2D = $map_music
-@onready var joueur = $Joueur # Vérifiez le nom du nœud dans votre scène
-
-func _ready():
-	if not music.playing:
-		music.play()
-	
-	# 1. On replace le joueur s'il y a une position sauvegardée
-	if signal_manager.position_joueur_sauvegardee != Vector2.ZERO:
-		joueur.global_position = signal_manager.position_joueur_sauvegardee
-	
-	# 2. On actualise l'aspect visuel de la map
-	_actualiser_map()
-
-func _actualiser_map():
-	# Exemple : Si le mini-jeu ballon est réussi
-	if signal_manager.batiments_repares[\"ballon\"]:
-		print(\"Le bâtiment Ballon est réparé !\")
-		# Ici, vous pouvez changer un sprite ou masquer un PNJ de quête
-
-# À appeler juste avant de lancer un mini-jeu (change_scene_to_file)
-func préparer_changement_scene():
-	signal_manager.position_joueur_sauvegardee = joueur.global_position
-"
+[ext_resource type="Script" uid="uid://dmg5otr3lw8op" path="res://map.gd" id="10_map"]
+[ext_resource type="Texture2D" uid="uid://c5y2gx58f21v3" path="res://main/image/chapiteau.png" id="11_0t07s"]
+[ext_resource type="Script" uid="uid://mtcyn85o36xp" path="res://chapiteau_2.gd" id="11_sb2pt"]
+[ext_resource type="Texture2D" uid="uid://da0v2kb6mix86" path="res://main/image/grotte.png" id="14_ooc2g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oysan"]
 texture = ExtResource("1_gqbix")
@@ -9046,7 +9023,7 @@ texture = ExtResource("1_gqbix")
 sources/2 = SubResource("TileSetAtlasSource_oysan")
 
 [node name="main" type="Node2D"]
-script = SubResource("GDScript_krxrc")
+script = ExtResource("10_map")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_offset = Vector2(-4058, 114)
@@ -9093,6 +9070,12 @@ position = Vector2(-2667, 650.00006)
 position = Vector2(1688.0001, 669.00006)
 scale = Vector2(0.2781251, 0.25859618)
 
+[node name="clown2" parent="Entité" instance=ExtResource("3_47ucb")]
+position = Vector2(3293.0002, 655)
+scale = Vector2(0.6361322, 0.5129489)
+texture = ExtResource("8_6qsgm")
+hframes = 4
+
 [node name="Stand" type="Node2D" parent="."]
 
 [node name="chapiteau" parent="Stand" instance=ExtResource("7_kse76")]
@@ -9105,4 +9088,16 @@ position = Vector2(1617, 635)
 [node name="chinabuilding" parent="Stand" instance=ExtResource("9_dysp3")]
 position = Vector2(-2806, 612)
 scale = Vector2(2.145833, 2.0458333)
-frame = 0
+
+[node name="chapiteau2" type="Sprite2D" parent="Stand"]
+position = Vector2(3150, 650)
+scale = Vector2(1.95, 1.95)
+texture = ExtResource("11_0t07s")
+hframes = 3
+script = ExtResource("11_sb2pt")
+
+[node name="grotte" type="Sprite2D" parent="Stand"]
+position = Vector2(4822, 623.00006)
+scale = Vector2(1.7808338, 1.6283338)
+texture = ExtResource("14_ooc2g")
+script = ExtResource("11_sb2pt")
