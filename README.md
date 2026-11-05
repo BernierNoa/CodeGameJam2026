@@ -20,7 +20,7 @@ Tu incarnes **Clem**, une jeune fille qui a grandi dans le village et n'a jamais
 
 | Action | Touche |
 |---|---|
-| Avancer / accélérer (course) | `A` ou flèche/joystick gauche, `D`, clic gauche ou flèche/joystick droit |
+| Avancer / accélérer (course) | `D`, clic gauche ou bouton/joystick droit (`ui_right`) |
 | Interagir | `E` |
 | Cliquer / sélectionner (mini-jeux) | Clic gauche de la souris |
 
@@ -38,7 +38,7 @@ Le jeu prend aussi en charge une manette (boutons et joystick).
 
 ## Structure du projet
 
-- `main_menu.tscn` / `accueil.gd` — Menu principal (Jouer, Sandbox, Crédits, Paramètres).
+- `main_menu.tscn` / `main_menu.gd` — Menu principal (Jouer, Sandbox, Crédits, Paramètres).
 - `introduction.tscn` / `introduction.gd` — Cinématique d'introduction narrant l'histoire.
 - `CourseMinotaure.tscn` / `game_manager.gd` / `joueur.gd` / `minotaure.gd` — Course-poursuite finale contre le Minotaure.
 - `gobelet_game.tscn` / `gobelet_game.gd` — Mini-jeu des gobelets.
